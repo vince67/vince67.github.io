@@ -4,7 +4,7 @@
 ---
 
 
-<h5><strong>{{ page.title }}</strong></h5>
+<h5  align="left" ><strong>{{ page.title }}</strong></h5>
         <ul>
             {% for post in site.posts %}
                 <li><h6>{{ post.date | date_to_string }}&nbsp;>>&nbsp;</h6><h5>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h5></li>
