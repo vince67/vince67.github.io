@@ -1,13 +1,12 @@
 ---
     layout: default
-    title: 维斯的博客
+    title: Blog Posts
 ---
 
-<h3>{{ page.title }}</h3>
+<h5><strong>{{ page.title }}</strong></h5>
     <p>----</p>
-    <p>文章</p>
         <ul>
             {% for post in site.posts %}
-                <li>{{ post.date | date_to_string }} <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+                <li><small>{{ post.date | date_to_string }} >><small><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
             {% endfor %}
         </ul>
