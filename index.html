@@ -7,6 +7,6 @@
 <h5><strong>{{ page.title }}</strong></h5>
         <ul>
             {% for post in site.posts %}
-                <li><small>{{ post.date | date_to_string }}<small><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+                <li><h6>{{ post.date | date_to_string }}&nbsp;>>&nbsp;</h6><h5><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h5></li>
             {% endfor %}
         </ul>
