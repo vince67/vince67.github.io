@@ -1,0 +1,65 @@
+---
+    layout: default
+    title: 这个站点是如何搭建的
+---
+
+<strong>实现思路：<br />
+</strong> 
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.首先把需要自动执行的django method写成django command<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2.将自己定义的django command添加到cron中使用cron服务实现定期执行
+</p>
+<p>
+<strong>Part1</strong> <strong>在django工程中添加自定义的django command</strong><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.我们自己建立的application叫做myapp，首先在这个app目录下，我们需要新建management目录，这个目录里应该包括：__init__.py（内容为空，用于打包）和commands目录，然后在commands目录下包括：__init__.py和mycommand.py ，其中 mycommand.py就是用于我们自定义command的方法，目录的树状结构如下：
+</p>
+<pre>myapp/
+&nbsp; &nbsp; __init__.py
+    models.py
+    management/
+        __init__.py
+        commands/
+            __init__.py
+            mycommand.py
+    tests.py
+    views.py</pre>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2.mycommand.py的command内容书写，简单示例如下：
+<pre class="brush:python; toolbar: true; auto-links: false;">from django.core.management.base import BaseCommand,commandError           
+
+class Command(BaseCommand):
+    def handle(self, *args, **options):         
+        print "hello world"</pre>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们把BaseCommand类关联进来，使用command类和handle方法来作为框架，如上，这个command实现的就是打印 "hello world".
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 通过以上 我们就可以使用python manage.py mycommand 的方式来运行我们自己的django命令了。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 想了解更详细，看<a target="_blank" href="https://docs.djangoproject.com/en/dev/howto/custom-management-commands/">这里</a>。
+</p>
+<p>
+<strong>Part2</strong> <strong>使用cron来定期执行django command</strong><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 首先要确定自己的cron服务是开启的：
+</p>
+<pre class="brush:shell; toolbar: true; auto-links: false;">sudo service crond start
+#sudo service crond stop
+#sudo service crond restart</pre>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将django command我写了一个简单的shell脚本,给大家参考： <br />
+<pre class="brush:shell; toolbar: true; auto-links: false;">#!bin/bash
+
+p=$PWD
+touch $p/djangocron
+touch $p/djangocron.log
+echo "0 6,12,18 * * 1-5 python $p/manage.py mycommand &gt; $p/djangocron.log 2&gt;&amp;1" &gt; djangocron
+crontab djangocron 
+crontab -l</pre>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 解释一下： <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这个脚本放在与manage.py同一目录下，以便p=$PWD获取能用的当前路径。 <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; touch先建立一个djangocron文件，用于存放crontab的命令，建立的djangocron.log用来存输出信息。 <br />
+<pre class="brush:shell; toolbar: true; auto-links: false;">0 6,12,18 * * 1-5 python $p/manage.py mycommand &gt; $p/djangocron.log 2&gt;&amp;1</pre>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这一句写入djangocron文件，就是cron的配置了 0 6,12,18 * * 1-5这几个参数未改动的格式是 * * * * * 五个参数使用空格隔开分别表示 分钟 小时 天 月 周，我这里的配置就是每个周一到周五的6点0分 12点0分 18点0分执行后面的命令; <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 后面的命令 python $p/manage.py mycommand，$p是路径的引用，其实就是 python manage.py mycommad.&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 小箭头 &gt; $p/djangocron.log 2&gt;&amp;1的意思就是 将命令的输出结果转存到djangocron.log文件，2&gt;&amp;1的意思是同时将错误信息也存入djangocron.log文件。 <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; crontab djangocron的作用是将我们写的djangocron文件在crontab中装载，装载后可以：
+<pre class="brush:shell; toolbar: true; auto-links: false;">crontab -l #查看
+crontab -e #修改</pre>
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 只要调整cron前面设置的时间参数，就可以测试自己的命令有没有成功执行，查看djangocron.log来查看输出和error。
+</p>
