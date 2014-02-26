@@ -1,0 +1,127 @@
+---
+    layout: default
+    title: 一段分析git log的python脚本
+---
+
+<h4><strong>{{ page.title }}</strong>&nbsp;&nbsp;<small>{{ page.date | date_to_string }}</small></h4><br />
+
+<h5><strong>what is it for</strong></h5><br />
+    <p>用git来管理工程的开发，git log是非常有用的‘历史’资料，<br />
+    需求就是来自这里，我们希望能对git log有一个定制性强的滤过<br />
+    此段脚本就是在完成这种类型的任务。</p>
+
+<h5><strong>script source</strong></h5>
+    <pre>
+    # -*- coding: utf-8 -*-
+
+import re
+import os
+import time
+import datetime
+import subprocess
+
+
+def run(project_name, project_dir, date_from, date_to, search_key, filename):
+    bug_dic = {}
+    bug_branch_dic = {}
+    try:
+        os.chdir(project_dir)
+    except Exception, e:
+        raise e
+    branches_list = []
+    branches_list = get_branches()
+    for branch in branches_list:
+        bug_branch_dic = deal_branch(project_name, date_from, date_to, branch ,search_key)
+        for item in bug_branch_dic:
+            if item not in bug_dic:
+                bug_dic[item] = bug_branch_dic[item]
+            else:
+                bug_dic[item] += bug_branch_dic[item]
+    log_output(filename, bug_dic)
+
+
+# abstract log of one branch
+def deal_branch(project_name, date_from, date_to, branch, search_key):
+    try:
+        os.system('git checkout ' + branch)
+        os.system('git pull ')
+    except Exception, error:
+        print error
+    cmd_git_log = ["git",
+                   "log",
+                   "--stat",
+                   "--no-merges", 
+                   "-m",
+                   "--after="+date_from,
+                   "--before="+date_to]
+    proc = subprocess.Popen(cmd_git_log,
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE)
+    stdout, stderr = proc.communicate()
+    bug_branch_dic = deal_lines(project_name,
+                                date_from,
+                                date_to,
+                                search_key,
+                                stdout)
+    return bug_branch_dic
+
+# write commits log to file
+def log_output(filename, bug_dic):
+    fi = open(filename, 'w')
+    for item in bug_dic:
+        m1 = '--'*5 +'BUG:' + item + '--'*20 + '\n'
+        fi.write(m1)
+        for commit in bug_dic[item]:
+            fi.write(commit)
+    fi.close()
+
+
+# analyze log 
+def deal_lines(project_name, date_from, date_to, search_key, stdout):
+    bug_dic = {}
+    for line in stdout.split('commit '):
+        if re.search('Bug: \d+', line) is not None and re.search(search_key, line) is not None:
+            bug_id = line.split('Bug: ')[1].split('\n')[0]
+            if bug_id not in bug_dic:
+                bug_dic[bug_id] = [line]
+            else:
+                bug_dic[bug_id] += [line]
+    return bug_dic
+
+
+# get all branches of a project
+def get_branches():
+    branch_list = []
+    branches = []
+    tmp_str = ''
+    try:
+        cmd_git_remote = 'git remote show origin'
+        proc = subprocess.Popen(cmd_git_remote.split(),
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
+        stdout, stderr = proc.communicate()
+        tmp_str = stdout.split('Local branches configured')[0]
+        try:
+            tmp_str = tmp_str.split('Remote branches:\n')[1]
+        except:
+            tmp_str = tmp_str.split('Remote branch:\n')[1]
+        branches = tmp_str.split('\n')
+        for branch in branches[0:-1]:
+            if re.search(' tracked', branch) is not None:
+                branch = branch.replace('tracked', '').strip(' ')
+                branch_list.append(branch)
+    except Exception, error:
+        if branch_list == []:
+            print "Can not get any branch!"
+    return branch_list
+
+
+if __name__ == '__main__':
+    project_name = ""    # project's name example: "errata-rails"
+    project_dir = ""    # path of the .git project. example: "/home/username/projects/errata-rails"
+    date_from = "2014-01-25"
+    date_to = "2014-02-26"
+    search_key = ""    # only search 'Bug: \d+' for default,
+    filename = ""    # name of output file. example:"/home/username/errata-rails_0125_0226.log"
+    run(project_name, project_dir, date_from, date_to, search_key, filename)
+    </pre>
