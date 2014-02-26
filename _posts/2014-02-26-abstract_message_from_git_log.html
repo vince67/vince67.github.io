@@ -138,7 +138,7 @@ if __name__ == '__main__':
     run(project_dir, date_from, date_to, search_key, filename)
     
     </pre>
-% if page.comments %
+{% if {{page.comments}} %}
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -153,4 +153,4 @@ if __name__ == '__main__':
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
- % endif %
+ {{% endif %}}
