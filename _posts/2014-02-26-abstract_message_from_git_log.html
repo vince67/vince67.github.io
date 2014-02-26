@@ -6,9 +6,14 @@
 <h4><strong>{{ page.title }}</strong>&nbsp;&nbsp;<small>{{ page.date | date_to_string }}</small></h4><br />
 
 <h5><strong>What is it for</strong></h5><br />
-    <p>用git来管理工程的开发，git log是非常有用的‘历史’资料，<br />
+    <p>
+    用git来管理工程的开发，git log是非常有用的‘历史’资料，<br />
     需求就是来自这里，我们希望能对git log有一个定制性强的滤过<br />
-    此段脚本就是在完成这种类型的任务。</p>
+    此段脚本就是在完成这种类型的任务。<br />
+    对于一个repo所有branch中的commit，<br />
+    脚本将会把message中存在BUG ID的一类commits给提取整理出来，<br />
+    并提供了额外的search_key, 用于定制过滤。
+    </p>
 
 <br /><h5><strong>Script source</strong></h5><br />
 
@@ -119,11 +124,11 @@ def get_branches():
 
 
 if __name__ == '__main__':
-    project_name = ""    # project's name example: "errata-rails"
-    project_dir = ""    # path of the .git project. example: "/home/username/projects/errata-rails"
+    project_name = ""    # project's name example: "jekyll_vincent"
+    project_dir = ""    # path of the .git project. example: "/home/username/projects/jekyll_vincent"
     date_from = "2014-01-25"
     date_to = "2014-02-26"
     search_key = ""    # only search 'Bug: \d+' for default,
-    filename = ""    # name of output file. example:"/home/username/errata-rails_0125_0226.log"
+    filename = ""    # name of output file. example:"/home/username/jekyll_0125_0226.log"
     run(project_name, project_dir, date_from, date_to, search_key, filename)
     </pre>
