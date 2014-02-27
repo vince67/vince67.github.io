@@ -1,7 +1,4 @@
-jekyll_vincent
-==============
-
-h1. Vince has a river
+h1. vince has a river
 ==============
 
 BLOG of vincent yonng, it is transformed by "Jekyll":http://github.com/mojombo/jekyll into a static site where I push the project to GitHub.
