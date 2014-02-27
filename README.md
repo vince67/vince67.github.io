@@ -7,7 +7,7 @@ It is transformed by "Jekyll":http://github.com/mojombo/jekyll into a static sit
 
 Templates are created by vincent, the name of this site in Chinese is
 
-"维斯有条河":http://vince67.github.io/jekyll_vincent/ .
+维斯有条河 : http://vince67.github.io/jekyll_vincent/ .
 
 License
 ==============
