@@ -86,12 +86,16 @@ def log_output(filename, bug_dic):
     fi.close()
 
 
-# analyze log 
+# analyze log
 def deal_lines(date_from, date_to, search_key, stdout):
     bug_dic = {}
     for line in stdout.split('commit '):
-        if re.search('Bug: \d+', line) is not None and re.search(search_key, line) is not None:
-            bug_id = line.split('Bug: ')[1].split('\n')[0]
+        if re.search('Bug:? \d+ ', line) is not None and re.search(search_key, line) is not None:
+            match = re.search('Bug:? \d+ ', line).group()
+            try:
+                bug_id = match.split('Bug: ')[1].split('\n')[0]
+            except Exception, e:
+                bug_id = match.split('Bug ')[1].split(' ')[0]
             if bug_id not in bug_dic:
                 bug_dic[bug_id] = [line]
             else:
