@@ -1,0 +1,72 @@
+---
+    layout: default
+    comments: true
+    title: linux系统资源监控的小demo
+---
+
+<h4><strong>{{ page.title }}</strong>&nbsp;&nbsp;<small>{{ page.date | date_to_string }}</small></h4><br />
+
+<h5><strong>在linux的一个角落</strong></h5><br />
+    <h6><strong>有个/proc文件系统</strong></h6>
+    <p>
+    这是来自文档的介绍：<br />
+    /proc 文件系统是 GNU/Linux 特有的。<br />
+    它是一个虚拟的文件系统，因此在该目录中的所有文件都不会消耗磁盘空间。<br />
+    通过它能够非常简便地了解系统信息，尤其是其中的大部分文件是人类可阅读的(不过还是需要一些帮助)。<br />
+    许多程序实际上只是从 /proc 的文件中收集信息，然后按照它们自己的格式组织后显示出来。<br />
+    有一些显示进程信息的程序(top、ps 等)就是这么作的。<br />
+    /proc 还是了解您系统硬件的好去处。就象那些显示进程信息的程序一样，不少程序只是提供了获取 /proc 中信息的接口。<br />
+    其中还有一个特殊的子目录：/proc/sys。它让您能够显示内核参数并更改它们，而且这一更改将立即生效。<br />
+    </p>
+    <h6><strong>大白话</strong></h6>
+    <p>也就是说，linux系统的状态，都在这个/proc系统中有状态的映射！<br />
+    而且这个东东足够简单!这是对系统资源管理分配者的巨大诱惑！<br />
+    因为只需去看这里的内容，就能知道现在系统状态了！<br /></p>
+
+<h5><strong>What this script is for</strong></h5><br />
+    <p>
+    这只是个小demo，用于获得系统cpu和内存的状态信息。<br />
+    它的未来，会超进化，成为一个展示信息更有人情味的监控器。<br /> 
+    </p>
+
+<br /><h5><strong>Script source</strong></h5><br />
+    <pre>
+# -*- coding: utf-8 -*-
+# created by vince67 Feb. 2014
+# nuovince@gmail.com
+
+import datetime
+import subprocess
+
+class ProcMonitor(object):
+    def __init__(self):
+        super(ProcMonitor, self).__init__()
+        self.meminfo = []
+        self.cpuinfo = []
+        self.time = None
+
+    def get_mem_cpu_info(self):
+        self.time = datetime.datetime.now()
+        proc_mem = subprocess.Popen('cat /proc/meminfo',
+                      stdout=subprocess.PIPE,
+                      shell=True)
+        self.meminfo = proc_mem.stdout.read().split('\n')
+        proc_cpu = subprocess.Popen('cat /proc/cpuinfo',
+                      stdout=subprocess.PIPE,
+                      shell=True)
+        self.cpuinfo = proc_cpu.stdout.read().split('\n')
+        print '#'*40
+        print self.time
+        print '#'*40
+        print '#'*20 + 'MEMORY INFO' + '#'*50
+        for mem_line in self.meminfo:
+            print mem_line
+        print '#'*20 + 'CPU INFO' + '#'*53
+        for cpu_line in self.cpuinfo:
+            print cpu_line
+
+
+if __name__ == '__main__':
+    PM = ProcMonitor()
+    PM.get_mem_cpu_info()
+    </pre>
