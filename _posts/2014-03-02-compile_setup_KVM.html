@@ -9,26 +9,22 @@
 <h6>本文为发布在<a href="vince67.github.io">维斯有条河</a>上的原创文章，转载请注明出处，KVM系列持续更新，敬请关注。 </h6>
 
 <h5><strong>KVM的编译和安装</strong></h5>
+<h5><strong>系统版本与硬件支持</strong></h5>
     <p>
+    楼主的内核版本：<br />
+    vince67@miss:~$ uname -a <br />
+    Linux miss 3.8.0-29-generic #42-Ubuntu SMP Tue Aug 13 23:12:18 UTC 2013 i686 i686 i686 GNU/Linux <br />
+    硬件支持：<br />
     KVM需要硬件虚拟化扩展的支持，安装之前请先查看自己的cpu是不是支持扩展。<br />
     终端运行: $ grep -E '(vmx|svm)' /proc/cpuinfo <br />
-    <img src='http://vince67.github.io/static/img/KVM/1.png' height="400" width="900" ><br />
-    通过它能够非常简便地了解系统信息，尤其是其中的大部分文件是人类可阅读的(不过还是需要一些帮助)。<br />
-    许多程序实际上只是从 /proc 的文件中收集信息，然后按照它们自己的格式组织后显示出来。<br />
-    有一些显示进程信息的程序(top、ps 等)就是这么作的。<br />
-    /proc 还是了解您系统硬件的好去处。就象那些显示进程信息的程序一样，不少程序只是提供了获取 /proc 中信息的接口。<br />
-    其中还有一个特殊的子目录：/proc/sys。它让您能够显示内核参数并更改它们，而且这一更改将立即生效。<br />
+    用于查看是否支持虚拟化扩展，如果你找到高亮的'vmx'(intel)或者'svm'(AMD)，说明是cpu是支持的。<br />
     </p>
-    <h6><strong>大白话</strong></h6>
-    <p>也就是说，linux系统的状态，都在这个/proc系统中有状态的映射！<br />
-    而且这个东东足够简单!这是对系统资源管理分配者的巨大诱惑！<br />
-    因为只需去看这里的内容，就能知道现在系统状态了！<br /></p><br />
-
-<h5><strong>What this script is for</strong></h5><br />
+<h5><strong>KVM源代码下载</strong></strong></h5>
     <p>
-    这只是个小demo，用于获得系统cpu和内存的状态信息。<br />
-    它的未来，会超进化，成为一个展示信息更有人情味的监控器。<br /> 
+    接下来我们要下载KVM的源码，我们在root/下建立一个kvm_demo的文件夹，进入后使用git clone命令下载.<br />
+    $ git clone git://git.kernel.org/pub/scm/virt/kvm/kvm.git kvm.git <br />
+    如果你的机器里没有安装git：<br />
+    apt-get git <br />
+    你看到的大概是如下的界面：<br />
+    <img src='http://vince67.github.io/static/img/KVM/1.png' height="400" width="900" ><br />
     </p>
-
-<br /><h5><strong>Script source</strong></h5><br />
-    <pre>
