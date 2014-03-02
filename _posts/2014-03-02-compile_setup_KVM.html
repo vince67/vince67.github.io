@@ -15,16 +15,27 @@
     vince67@miss:~$ uname -a <br />
     Linux miss 3.8.0-29-generic #42-Ubuntu SMP Tue Aug 13 23:12:18 UTC 2013 i686 i686 i686 GNU/Linux <br />
     硬件支持：<br />
-    KVM需要硬件虚拟化扩展的支持，安装之前请先查看自己的cpu是不是支持扩展。<br />
-    终端运行: $ grep -E '(vmx|svm)' /proc/cpuinfo <br />
-    用于查看是否支持虚拟化扩展，如果你找到高亮的'vmx'(intel)或者'svm'(AMD)，说明是cpu是支持的。<br />
+    KVM需要硬件虚拟化扩展的支持，安装之前请先执行下面命令查看自己的cpu是不是支持扩展。<br />
+    ~$ grep -E '(vmx|svm)' /proc/cpuinfo <br />
+    如果你找到高亮的'vmx'(intel)或者'svm'(AMD)，说明是cpu是支持的。<br />
     </p>
 <h5><strong>KVM源代码下载</strong></strong></h5>
     <p>
     接下来我们要下载KVM的源码，我们在root/下建立一个kvm_demo的文件夹，进入后使用git clone命令下载.<br />
     $ git clone git://git.kernel.org/pub/scm/virt/kvm/kvm.git kvm.git <br />
     如果你的机器里没有安装git：<br />
-    apt-get git <br />
+    ~$ sudo apt-get git <br />
     你看到的大概是如下的界面：<br />
     <img src='http://vince67.github.io/static/img/KVM/1.png' height="500" width="900" ><br />
+    </p>
+<h5><strong>menuconfig配置KVM</strong></strong></h5>
+    <p>
+    我们使用make menuconfig的命令来配置KVM，因为图形界面比较友好。<br />
+    make menuconfig使用需要安装ncurses库，使用以下命令即可：<br />
+    ~$ sudo apt-get install libncurses5-dev <br />
+    你看到的大概是如下的界面：<br />
+    <img src='http://vince67.github.io/static/img/KVM/2.png' height="500" width="900" ><br />
+    </p>
+    <p>
+    ---未完---
     </p>
