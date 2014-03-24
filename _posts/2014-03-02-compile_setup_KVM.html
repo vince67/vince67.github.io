@@ -69,5 +69,33 @@
         等到机器编译完毕，我们的编译工作就完成了。<br />
         <img src='http://vince67.github.io/static/img/KVM/1-8.png' height="500" width="900" ><br />
 	</p>
-<---待续--->
-
+<h5><strong>安装KVM</strong></strong></h5>
+    <p>
+    (一)安装modules<br />
+        <p>
+        如上图中最后的安装命令，执行make modules_install. <br />
+        此命令会默认将modules安装到/lib/modules/$kernel_version/kernel目录中.<br />
+        安装modules成功后，可以在相应的路径下看到kvm的模块<br />
+        执行 ls -l /lib/modules/2.14.0-rc3+/kernel/<br />
+        执行 ls -l /lib/modules/2.14.0-rc3+/kernel/arch/x86/kvm<br />
+        如下图<br />
+        </p>
+        <img src='http://vince67.github.io/static/img/KVM/1-9.png' height="500" width="900" ><br />
+    </p>
+    <p>
+    (二）安装kernel和initramfs<br />
+        执行命令： make install <br />
+        在/boot目录下生成了内核(vmlinux)和initramfs等内核启动所需的文件<br />
+        grub配置文件/boot/grub/grub.conf也有自动添加的grub选项:<br />
+        <img src='http://vince67.github.io/static/img/KVM/1-10.png' height="500" width="900" ><br />
+        <img src='http://vince67.github.io/static/img/KVM/1-11.png' height="500" width="900" ><br />
+    </p>
+    <p>
+    (三)安装后检查<br />
+        重启系统选择刚才为了KVM而编译 安装的内核启动，系统一般会默认已经加载了kvm和kvm_intel这两个模块<br />
+        如果没有加载，请手动用modprobe命令依次加载<br />
+        确认模块加载成功之后，检查/dev/kvm这个文件.<br />
+        它是kvm内核模块提供给用户空间qemu-kvm程序使用的一个控制接口，<br />
+        提供了客户机操作系统运行所需要的模拟和实际的硬件设备环境。<br />
+        <img src='http://vince67.github.io/static/img/KVM/1-12.png' height="500" width="900" ><br />
+    </p>
