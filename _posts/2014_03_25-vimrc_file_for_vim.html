@@ -1,0 +1,81 @@
+---
+	layout: default
+	comments: true
+	title: 【VIM配置】无插件VIM配置文件vimrc
+---
+
+<h4><strong>{{ page.title }}</strong>&nbsp;&nbsp;<small>{{ page.date | date_to_string }}</small></h4><br />
+<p>
+此配置文件为无插件版，安装vim之后只需
+将下面文件复制到～/.vimrc文件。<br />
+</p>
+
+
+<br /><h5><strong>~/.vimrc</strong></h5><br />
+<pre>
+" Created by vince67
+" March 2014
+" Email: nuovince@gmail.com 
+" Website: vince67.github.io
+
+" 避免以前版本的一些bug和局限
+set nocompatible
+
+" 逐步搜索模式，对当前键入的字符进行搜索而不必等待键入完成,/b寻找b开头的。
+set incsearch
+
+" 搜索时高亮显示找到文本
+set hlsearch
+
+" 在Insert模式下退格键何时可以删除光标之前的字符。三项内容分别指定了Vim可以删除位于行首的空格,断行,以及开始进入Insert模式之前的位置。
+set backspace=indent,eol,start
+
+" 在开始一个新行时对该行施以上一行的缩进方式。这样,你在Insert模式下按回车或在Normal模式下按o来添加新行时该行将会与上一行有相同的缩进。
+set autoindent
+set smartindent
+
+" 支持c/c++缩进
+set cin
+
+" 设置tab键为4个空格，设置当行之间交错时使用4个空格
+set tabstop=4
+set shiftwidth=4
+
+" 匹配模式，左括号匹配右括号
+set showmatch
+
+" 在覆盖一个文件之前备份该文件。但是对VMS系统除外,因为该系统已经为文件保存了老的版本。备份文件名由当前文件名加后辍"~"组成。
+if has("vms")
+set nobackup
+else
+set backup
+endif
+
+" 设置冒号命令和搜索命令的命令历史列表的长度。
+set history=1000
+
+" 总是在Vim窗口的右下角显示当前光标的行列信息。
+set ruler
+
+" 在Vim窗口的右下角显示一个完整的命令已经完成的部分。比如说你键入"2f",Vim就会在你键入下一个要查找的字符之前显示已经键入的"2f"。一旦你接下来再键入一个字符比如"w",那么一个完整的命令"2fw"就会被Vim 执行,同时刚才显示的"2f"也将消失。
+set showcmd
+
+" 语法高亮
+syntax on
+
+" 显示行号
+set nu
+
+" 凸显当前行
+set cursorline
+
+" 检测文件类型
+filetype on
+
+" 启用鼠标
+set mouse=a
+
+" 配色方案
+colorscheme torte
+</pre>
+
