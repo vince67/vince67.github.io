@@ -7,7 +7,7 @@
 <h4><strong>{{ page.title }}</strong>&nbsp;&nbsp;<small>{{ page.date | date_to_string }}</small></h4><br />
 
 <h6>本文为发布在<a href="vince67.github.io">维斯有条河</a>上的原创文章，主要参考《KVM虚拟化技术实战与原理解析》任永杰 单海涛，转载请注明出处，KVM系列持续更新，敬请关注。 
-<br /><a href="http://vince67.github.io/2014/03/02/compile_setup_KVM.html" >上一弹</a><a href=>下一弹</a></h6>
+<a href="http://vince67.github.io/2014/03/02/compile_setup_KVM.html" >上一弹</a><a href=>下一弹</a></h6>
 
 <h5><strong>qemu-kvm 编译和安装</strong></h5>
 <p>
@@ -18,8 +18,7 @@
 
 <h5><strong>下载qemu-kvm源码</strong></h5>
 <p>
-	首先，<br/>
-	下载qemu-kvm源代码<br />
+	从git源下载qemu-kvm源代码<br />
 	完成后，进入目录<br />
 	<pre> 
 	$ git clone https:/git.kernel.org/pub/scm/virt/kvm/qemu-kvm.git qemu-kvm.git
@@ -33,20 +32,14 @@
 	显示配置的帮助手册<br/>
 	<pre>
 	$ ./configure --help
-	</pre>
-	进行配置
-	<pre> 
+	# 进行配置 
 	$ ./configure
-	</pre>
-	执行编译命令有可能确实glib-2.12导致失败<br />
-	需要安装libglib2.0-dev包<br />
-	<pre>
+	# 执行编译命令有可能确实glib-2.12导致失败
+	# 需要安装libglib2.0-dev包
 	$ sudo apt-get install libglib2.0-dev
 	</pre>
 	如下图
 	<img src='http://vince67.github.io/static/img/KVM/2-13.png' height="500" width="900" >
-</p>
-<p>
 	执行编译命令<br />
 	<pre>
 	$ make -j 20
