@@ -1,7 +1,7 @@
 ---
     layout: default
     comments: true
-    title: 【KVM图文第二弹】编译安装qemu-kvm
+    title: 【KVM第二弹】编译安装qemu-kvm
 ---
 
 <h4><strong>{{ page.title }}</strong>&nbsp;&nbsp;<small>{{ page.date | date_to_string }}</small></h4><br />
@@ -11,54 +11,54 @@
 
 <h5><strong>qemu-kvm 编译和安装</strong></h5>
 <p>
-	kvm是内核模块，而在用户空间，需要QEMU来模拟所需要的CPU和设备模型，<br/>
-	以及用于启动客户机进程，这样才有了一个完整的KVM运行环境。<br />
-	qemu-kvm是QEMU的一个改进分支<br />
+    kvm是内核模块，而在用户空间，需要QEMU来模拟所需要的CPU和设备模型，<br/>
+    以及用于启动客户机进程，这样才有了一个完整的KVM运行环境。<br />
+    qemu-kvm是QEMU的一个改进分支<br />
 </p>
 
 <h5><strong>下载qemu-kvm源码</strong></h5>
 <p>
-	从git源下载qemu-kvm源代码<br />
-	完成后，进入目录<br />
-	<pre> 
-	$ git clone https:/git.kernel.org/pub/scm/virt/kvm/qemu-kvm.git qemu-kvm.git
-	$ cd qemu-kvm.git
-	$ pwd
-	</pre>
+    从git源下载qemu-kvm源代码<br />
+    完成后，进入目录<br />
+    <pre> 
+    $ git clone https:/git.kernel.org/pub/scm/virt/kvm/qemu-kvm.git qemu-kvm.git
+    $ cd qemu-kvm.git
+    $ pwd
+    </pre>
 </p>
 
 <h5><strong>配置和编译</strong></h5>
 <p>
-	<pre>
-	# 显示配置的帮助手册
-	$ ./configure --help
-	# 进行配置 
-	$ ./configure
-	# 执行编译命令有可能确实glib-2.12导致失败
-	# 需要安装libglib2.0-dev包
-	$ sudo apt-get install libglib2.0-dev
-	</pre>
-	如下图<br />
-	<img src='http://vince67.github.io/static/img/KVM/2-13.png' height="500" width="900" ><br />
-	执行编译命令<br />
-	<pre>
-	$ make -j 20
-	</pre>
-	会得到 qemu-system-x86_64, 这就是我们常用的qemu-kvm命令行工具。<br />
-	<img src='http://vince67.github.io/static/img/KVM/2-14.png' height="500" width="900" ><br />
+    <pre>
+    # 显示配置的帮助手册
+    $ ./configure --help
+    # 进行配置 
+    $ ./configure
+    # 执行编译命令有可能确实glib-2.12导致失败
+    # 需要安装libglib2.0-dev包
+    $ sudo apt-get install libglib2.0-dev
+    </pre>
+    如下图<br />
+    <img src='http://vince67.github.io/static/img/KVM/2-13.png' height="500" width="900" ><br />
+    执行编译命令<br />
+    <pre>
+    $ make -j 20
+    </pre>
+    会得到 qemu-system-x86_64, 这就是我们常用的qemu-kvm命令行工具。<br />
+    <img src='http://vince67.github.io/static/img/KVM/2-14.png' height="500" width="900" ><br />
 </p>
 
 <h5><strong>安装</strong></h5>
 <p>
-	编译成功之后，运行安装命令。<br />
-	<pre>
-	$ make install | tee make-install.log
-	</pre>
-	<img src='http://vince67.github.io/static/img/KVM/2-15.png' height="500" width="900" ><br />
+    编译成功之后，运行安装命令。<br />
+    <pre>
+    $ make install | tee make-install.log
+    </pre>
+    <img src='http://vince67.github.io/static/img/KVM/2-15.png' height="500" width="900" ><br />
 </p>
 
-<h5><strong>安装之后检查系统状态</strong></h5>	
-	<img src='http://vince67.github.io/static/img/KVM/2-16.png' height="500" width="900" ><br />
+<h5><strong>安装之后检查系统状态</strong></h5>    
+    <img src='http://vince67.github.io/static/img/KVM/2-16.png' height="500" width="900" ><br />
 
 
 
