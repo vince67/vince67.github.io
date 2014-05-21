@@ -20,11 +20,17 @@
 " Email: nuovince@gmail.com 
 " Website: vince67.github.io
 
+" 编码
+set encoding=utf-8
+
 " 避免以前版本的一些bug和局限
 set nocompatible
 
 " 逐步搜索模式，对当前键入的字符进行搜索而不必等待键入完成,/b寻找b开头的。
 set incsearch
+
+"自动识别文件类型
+" set filetype
 
 " 搜索时高亮显示找到文本
 set hlsearch
@@ -33,8 +39,8 @@ set hlsearch
 set backspace=indent,eol,start
 
 " 在开始一个新行时对该行施以上一行的缩进方式。这样,你在Insert模式下按回车或在Normal模式下按o来添加新行时该行将会与上一行有相同的缩进。
-set autoindent
-set smartindent
+" set autoindent
+" set smartindent
 
 " 支持c/c++缩进
 set cin
@@ -47,11 +53,11 @@ set shiftwidth=4
 set showmatch
 
 " 在覆盖一个文件之前备份该文件。但是对VMS系统除外,因为该系统已经为文件保存了老的版本。备份文件名由当前文件名加后辍"~"组成。
-if has("vms")
-set nobackup
-else
-set backup
-endif
+" if has("vms")
+" set nobackup
+" else
+" set backup
+" endif
 
 " 设置冒号命令和搜索命令的命令历史列表的长度。
 set history=1000
@@ -68,7 +74,7 @@ syntax on
 " 显示行号
 set nu
 
-" 显示行尾空格和TAB
+" 显示空格和TAB
 set list
 set listchars=tab:>-,trail:-
 
@@ -83,5 +89,20 @@ set mouse=a
 
 " 配色方案
 colorscheme torte
+
+" 以下为插件
+
+" 管理插件的插件pathogen
+call pathogen#infect()
+
+" NERDTree目录树插件
+noremap <F4> :NERDTree<cr>
+
+" Powerline
+set guifont=PowerlineSymbols\ for\ Powerline
+set nocompatible
+set laststatus=2
+set t_Co=256
+let g:Powerline_symbols = 'fancy'
 </pre>
 
