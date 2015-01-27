@@ -1,0 +1,10 @@
+http://vince67.github.io
+http://vince67.github.io/2014/02/25/how_to_build_this_site.html
+http://vince67.github.io/2014/02/25/set_cronjob_for_django_commands.html
+http://vince67.github.io/2014/02/26/abstract_message_from_git_log.html
+http://vince67.github.io/2014/02/28/demo_of_system_source_monitor.html
+http://vince67.github.io/2014/03/02/compile_setup_KVM.html
+http://vince67.github.io/2014/03/25/vimrc_file_for_vim.html
+http://vince67.github.io/2014/03/26/configure_qemu_KVM.html
+http://vince67.github.io/2014/05/20/get_machine_status.html
+http://vince67.github.io/2014/05/21/vim_plugin_set.html
