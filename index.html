@@ -7,6 +7,17 @@
 <h5  align="left" ><strong>{{ page.title }}</strong></h5>
         <ul>
             {% for post in site.posts %}
-                <li><h5><small>{{ post.date | date_to_string }}&nbsp;>>&nbsp;</small><a href="{{ post.url }}">{{ post.title }}</a></h5></li>
+                <div class="row">
+                    <div class="span6 2014">
+                        {% if post.date < 2015 %}
+                            <li><h5><small>{{ post.date | date_to_string }}&nbsp;>>&nbsp;</small><a href="{{ post.url }}">{{ post.title }}</a></h5></li>
+                        {% endif %}
+                    </div>
+                    <div class="span6 2015">
+                        {% if post.date >= 2015%}
+                            <li><h5><small>{{ post.date | date_to_string }}&nbsp;>>&nbsp;</small><a href="{{ post.url }}">{{ post.title }}</a></h5></li>
+                        {% endif %}
+                    </div>
+                </div>
             {% endfor %}
         </ul>
