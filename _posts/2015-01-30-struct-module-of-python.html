@@ -41,10 +41,13 @@
 </h5>
 <p>
     因为涉及二进制串和字节处理，所以包含的知识是比较底层的。
-<br>
-    首先要知道 struct 中的 pack 和 unpack 是用来完成数据结构和字节流之间转换的，也就是说，这两个函数是在转换数据的表示形式，并不会改变数据。
-比如 int a ＝ 4； 这里的 a 转换通过'i' format 成字节流为: \x04\x00\x00\x00 (大端序为 \x00\x00\x00\x04)。
-<br>
+    <br>
+    首先要知道 struct 中的 pack 和 unpack 是用来完成数据结构和字节流之间转换的
+    <br>
+    也就是说，这两个函数是在转换数据的表示形式，并不会改变数据。
+    <br>
+    比如 int a ＝ 4； 这里的 a 转换通过'i' format 成字节流为: \x04\x00\x00\x00 (大端序为 \x00\x00\x00\x04)。
+    <br>
     以上或者反过来。
 </p>
 
@@ -62,17 +65,29 @@
     </li>
     <li>
         <h6><strong>怎么转？</strong></h6>
-        这就是函数（主要就是 pack 和 unpack）的使用方法。 pack(format, value1, value2...) unpack(format, string)
+        这就是函数（主要就是 pack 和 unpack）的使用方法。
         <br>
-        其中：
+        pack(format, value1, value2...)
         <br>
-            pack函数将普通的数据结构转成字节流，你自然要提供一个 format, 这个 format 描述了你要操作的后面许多value的数据类型，从而按照这个描述生成的有意义的字节流。 而 接收到的字节流 或者 之前生成的字节流，可以通过unpack函数来解析，一大段字节来了，你要解析，自然需要描述一下这个字节流我该在哪里切分一下，应该用什么顺序等，这就是format在做的事情。
+        unpack(format, string)
+        <br>
+        pack函数将普通的数据结构转成字节流
+        <br>
+        你自然要提供一个 format, 这个 format 描述了你要操作的后面许多value的数据类型，从而按照这个描述生成的有意义的字节流。
+        <br>
+        而接收到的字节流或者生成的字节流，可以通过unpack函数来解析。
+        <br>
+        一大段字节来了，你要解析，自然需要描述一下这个字节流我该在哪里切分一下，应该用什么顺序等
+        <br>
+        这就是format在做的事情。
     </li>
     <li>
         <h6><strong>format 该怎么写?</strong></h6>
         请自行查询这里 format 的语法。
         <br>
-        特别的，由于系统本身处理字符串的差异，在描述数据类型的format参数的开头，也可能有（可缺省）描述format方式的符号（比如字节顺序），具体同format 语法，请自行查询。
+        特别的，由于系统本身处理字符串的差异
+        <br>
+        在描述数据类型的format参数的开头，也可能有（可缺省）描述format方式的符号（比如描述字节顺序）。
     </li>
 </ul>
 
@@ -88,7 +103,9 @@
         <h6><strong>代码中的tag，即为 format 变量。</strong></h6>
             tag = '>h' if self.endian == HIGHT_ENDIAN else 'h'
         <br>
-            这里通过判断 字节顺序，来判断是否添加 大端字节序描述符‘>’ 到format前，'h'在format语法中代表 2字节长度的 C语言 short类型（Python中的 integer ）。
+        这里通过判断字节顺序，来判断是否添加 大端字节序描述符‘>’ 到format前，
+        <br>
+        'h'在format语法中代表 2字节长度的 C语言 short类型（Python中的 integer ）。
     </li>
 
     <li>
@@ -97,7 +114,9 @@
         <br>
             self.buffer += (struct.pack(tag, length))
         <br>
-            求的value的长度，现在的tag值为“h”或者“>h”, 来表示长度length, 调用函数生成字节流添加到buffer的尾端。
+            求的value的长度，现在的tag值为“h”或者“>h”
+        <br>
+            表示长度length, 调用函数生成字节流添加到buffer的尾端。
     </li>
     <li>
         <h6><strong>保存value的值</strong></h6>
