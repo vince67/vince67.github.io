@@ -5,10 +5,13 @@
 ---
 
 <h4><strong>{{ page.title }}</strong>&nbsp;&nbsp;<small>{{ page.date | date_to_string }}</small></h4><br />
+<br>
 <p>
     本文选自在 SegmentFault 上我的回答，链接<a href="http://segmentfault.com/q/1010000002522474/a-1020000002522863">戳这里</a>
 </p>
 
+<br>
+<br>
 <h5>
     <strong>
         问题引用：
@@ -29,11 +32,14 @@
 </pre>
 
 
+<hr>
+<br>
 <h5>
     <strong>
         答：
     </strong>
 </h5>
+<br>
 <p>
     因为涉及二进制串和字节处理，所以包含的知识是比较底层的。
     首先要知道 struct 中的 pack 和 unpack 是用来完成数据结构和字节流之间转换的，也就是说，这两个函数是在转换数据的表示形式，并不会改变数据。
@@ -41,6 +47,8 @@
     以上或者反过来。
 </p>
 
+<br>
+<br>
 <h5>
     <strong>
         那么简洁地说：
@@ -64,6 +72,8 @@
     </li>
 </ul>
 
+<br>
+<br>
 <h5>
     <strong>
     所以，我们来看你的这段代码：
