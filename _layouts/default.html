@@ -15,60 +15,64 @@
             <ul class="nav nav-tabs">
                 <li><a href="http://vince67.github.io">Home</a></li>
             </ul>
-            <div class="span4">
-                {{ content }}
-            </div>
-            {% if {{page.comments}} %}
-                    <br /><br />
-                    <hr />
-                    <div id="disqus_thread"></div>
-                    <script type="text/javascript">
-                        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-                        var disqus_shortname = 'vincehasariver'; // required: replace example with your forum shortname
-
-                        /* * * DON'T EDIT BELOW THIS LINE * * */
-                        (function() {
-                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                        })();
-                    </script>
-                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-            {% endif %}
-
-            <br /><br />
-            <hr />
-            <h5  align="left" ><strong>About</strong></h5>
-                <ul>
-                    <li>
-                        <a href="http://www.v2ex.com/member/v7">
-                            <img src="/static/img/link_logo/v2ex.png" style="margin-left: 10px; width: 65px; height: 20px;">
-                        </a>
-                        <a href="http://segmentfault.com/u/v7">
-                            <img src="/static/img/link_logo/sf.png" style="margin-left: 20px; width: 90px; height: 30px;">
-                        </a>
-                        <a href="http://weibo.com/u/2135822193">
-                            <img src="/static/img/link_logo/sina.png" style="margin-left: 20px; width: 70px; height: 30px;">
-                        </a>
-                    </li>
-                    <li>
-                    <h6>&copy;vincent yonng&nbsp;&nbsp;&nbsp;&nbsp;
-                        Home:&nbsp;<a href="http://github.com/vince67/">github.com/vince67</a>&nbsp;&nbsp;
-                        &nbsp;&nbsp;Blog:&nbsp;<a href="http://vince67.github.io">&nbsp;&nbsp;维斯有条河</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;Email:&nbsp;<a class="email" href="mailto:nuovince@gmail.com">nuovince@gmail.com</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;友情链接:&nbsp;<a href="http://zhangxiaoyang.me/">张小洋的布劳阁</a>
-                        &nbsp;&nbsp;
+            <div class="row">
+              <div class="span8">
+                  {{ content }}
+              </div>
+              <div class='span4'>
+                {% if {{page.comments}} %}
+                        <br /><br />
+                        <hr />
+                        <div id="disqus_thread"></div>
                         <script type="text/javascript">
-                        var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-                        document.write(unescape("%3Cspan id='cnzz_stat_icon_1000290660'%3E%3C/span%3E%3Cscript src='" + 
-                        cnzz_protocol + 
-                        "s23.cnzz.com/z_stat.php%3Fid%3D1000290660%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));
+                            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                            var disqus_shortname = 'vincehasariver'; // required: replace example with your forum shortname
+
+                            /* * * DON'T EDIT BELOW THIS LINE * * */
+                            (function() {
+                                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                            })();
                         </script>
-                        </h6>
-                    <br />
-                    </li>
-                </ul>
+                        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                {% endif %}
+
+                <br /><br />
+                <hr />
+                  <h5  align="left" ><strong>About</strong></h5>
+                  <ul>
+                      <li>
+                          <a href="http://www.v2ex.com/member/v7">
+                              <img src="/static/img/link_logo/v2ex.png" style="margin-left: 10px; width: 65px; height: 20px;">
+                          </a>
+                          <a href="http://segmentfault.com/u/v7">
+                              <img src="/static/img/link_logo/sf.png" style="margin-left: 20px; width: 90px; height: 30px;">
+                          </a>
+                          <a href="http://weibo.com/u/2135822193">
+                              <img src="/static/img/link_logo/sina.png" style="margin-left: 20px; width: 70px; height: 30px;">
+                          </a>
+                      </li>
+                      <li>
+                      <h6>&copy;vincent yonng&nbsp;&nbsp;&nbsp;&nbsp;
+                          Home:&nbsp;<a href="http://github.com/vince67/">github.com/vince67</a>&nbsp;&nbsp;
+                          &nbsp;&nbsp;Blog:&nbsp;<a href="http://vince67.github.io">&nbsp;&nbsp;维斯有条河</a>
+                          &nbsp;&nbsp;&nbsp;&nbsp;Email:&nbsp;<a class="email" href="mailto:nuovince@gmail.com">nuovince@gmail.com</a>
+                          &nbsp;&nbsp;&nbsp;&nbsp;友情链接:&nbsp;<a href="http://zhangxiaoyang.me/">张小洋的布劳阁</a>
+                          &nbsp;&nbsp;
+                          <script type="text/javascript">
+                          var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+                          document.write(unescape("%3Cspan id='cnzz_stat_icon_1000290660'%3E%3C/span%3E%3Cscript src='" + 
+                          cnzz_protocol + 
+                          "s23.cnzz.com/z_stat.php%3Fid%3D1000290660%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));
+                          </script>
+                          </h6>
+                      <br />
+                      </li>
+                  </ul>
+                </div>
+            </div>
         </div>
     </div>
 </body>
