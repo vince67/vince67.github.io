@@ -1,5 +1,4 @@
-Vince has a river
-==============
+####Vince has a river
 
 Blog page of vincent yonng.
 
@@ -9,8 +8,7 @@ Templates are created by vincent, the name of this site in Chinese is
 
 [维斯有条河](http://vince67.github.io)
 
-License
-==============
+####License
 
 The following files and directories and their contents are Copyright vince67. 
 
