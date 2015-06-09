@@ -1,7 +1,7 @@
 ---
     layout: default
     comments: true
-    title:  【Gitlab】迅速搭建可用 gitlab
+    title:  【Gitlab】迅速搭建可用 Gitlab
 ---
 
 ##<strong>{{ page.title }}</strong>&nbsp;&nbsp;<small>{{ page.date | date_to_string }}</small><br><br>
