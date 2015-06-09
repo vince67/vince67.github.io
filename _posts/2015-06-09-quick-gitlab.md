@@ -4,7 +4,7 @@
     title:  【Gitlab】迅速搭建可用 gitlab
 ---
 
-####<strong>{{ page.title }}</strong>&nbsp;&nbsp;<small>{{ page.date | date_to_string }}</small>
+###<strong>{{ page.title }}</strong>&nbsp;&nbsp;<small>{{ page.date | date_to_string }}</small>
 
 
 
@@ -13,7 +13,7 @@
 - [Start](#Start)
 - [Maintenance](#Maintenance)
 
-# Introduction
+#### Introduction
 
 - GITLAB版本
 
@@ -33,7 +33,7 @@
    1. [docker-gitlab](https://github.com/sameersbn/docker-gitlab)
    2. [17173](http://17173ops.com/2014/11/11/gitlab%E6%90%AD%E5%BB%BA%E4%B8%8E%E7%BB%B4%E6%8A%A4%EF%BC%88%E5%9F%BA%E4%BA%8Edocker%E9%95%9C%E5%83%8Fsameersbndocker-gitlab%EF%BC%89.shtml#toc8)
 
-# Installtion
+#### Installtion
 
 - 我们使用`docker`的方式搭建`gitlab`, 所以首先需要[安装 docker](https://docs.docker.com/installation/ubuntulinux/)。
 
@@ -48,7 +48,7 @@
         docker pull sameersbn/mysql:latest
         docker pull sameersbn/redis:lates
 
-# Start
+#### Start
 
 - 官方提供了[Quick Start](https://github.com/sameersbn/docker-gitlab#quick-start)的参考。
 
@@ -102,59 +102,59 @@
 
     - 挂载了两个新建目录 `/my/gitlab/data` `/my/gitlab/log`, 这样在 host 主机上就可以找到这些内容。
 
-    － `--env-file my_gitlab.conf` 此处选项是通过 `my_gitlab.conf` 文件来作为配置文件启动， 下面介绍几个常用配置组。
+    - `--env-file my_gitlab.conf` 此处选项是通过 `my_gitlab.conf` 文件来作为配置文件启动， 下面介绍几个常用配置组。
 
 
 -  `my_gitlab.conf`文件中的常用配置组。包括：
 
     1. **GITLAB HOST 配置** 设置访问主页地址，以及 root 用户的初始密码
 
-        GITLAB_HOST=example.gitlab.com
-        GITLAB_TIMEZONE=UTC
-        GITLAB_ROOT_PASSWORD=password
+            GITLAB_HOST=example.gitlab.com
+            GITLAB_TIMEZONE=UTC
+            GITLAB_ROOT_PASSWORD=password
 
     2. **EMAIL 配置** gitlab 平台的email设置
 
-        GITLAB_EMAIL: The email address for the GitLab server. Defaults to `example@example.com`.
-        GITLAB_EMAIL_DISPLAY_NAME: The name displayed in emails sent out by the GitLab mailer. Defaults to `GitLab`.
-        GITLAB_EMAIL_REPLY_TO: The reply to address of emails sent out by GitLab. Defaults to the `noreply@example.com`.
-        GITLAB_EMAIL_ENABLED: Enable or disable gitlab mailer. Defaults to the `SMTP_ENABLED` configuration.
+            GITLAB_EMAIL: The email address for the GitLab server. Defaults to `example@example.com`.
+            GITLAB_EMAIL_DISPLAY_NAME: The name displayed in emails sent out by the GitLab mailer. Defaults to `GitLab`.
+            GITLAB_EMAIL_REPLY_TO: The reply to address of emails sent out by GitLab. Defaults to the `noreply@example.com`.
+            GITLAB_EMAIL_ENABLED: Enable or disable gitlab mailer. Defaults to the `SMTP_ENABLED` configuration.
 
     3. **SMTP 配置** gitlab需要email配置来做通知工作。
 
-        SMTP_ENABLED: Enable mail delivery via SMTP. Defaults to `true` if `SMTP_USER` is defined, else defaults to `false`.
-        SMTP_DOMAIN: SMTP domain. Defaults to` www.gmail.com`
-        SMTP_HOST: SMTP server host. Defaults to `smtp.gmail.com`.
-        SMTP_PORT: SMTP server port. Defaults to `587`.
-        SMTP_USER: SMTP username.
-        SMTP_PASS: SMTP password.
-        SMTP_STARTTLS: Enable STARTTLS. Defaults to `true`.
-        SMTP_OPENSSL_VERIFY_MODE: SMTP openssl verification mode. Accepted values are `none`, `peer`, `client_once` and `fail_if_no_peer_cert`. Defaults to `none`.
-        SMTP_AUTHENTICATION: Specify the SMTP authentication method. Defaults to `login` if `SMTP_USER` is set.
+            SMTP_ENABLED: Enable mail delivery via SMTP. Defaults to `true` if `SMTP_USER` is defined, else defaults to `false`.
+            SMTP_DOMAIN: SMTP domain. Defaults to` www.gmail.com`
+            SMTP_HOST: SMTP server host. Defaults to `smtp.gmail.com`.
+            SMTP_PORT: SMTP server port. Defaults to `587`.
+            SMTP_USER: SMTP username.
+            SMTP_PASS: SMTP password.
+            SMTP_STARTTLS: Enable STARTTLS. Defaults to `true`.
+            SMTP_OPENSSL_VERIFY_MODE: SMTP openssl verification mode. Accepted values are `none`, `peer`, `client_once` and `fail_if_no_peer_cert`. Defaults to `none`.
+            SMTP_AUTHENTICATION: Specify the SMTP authentication method. Defaults to `login` if `SMTP_USER` is set.
 
     4. **Backups 配置** 自动备份
 
-        GITLAB_BACKUP_DIR: The backup folder in the container. Defaults to `/home/git/data/backups`
-        GITLAB_BACKUPS: Setup cron job to automatic backups. Possible values `disable`, `daily`, `weekly` or `monthly`. Disabled by default
-        GITLAB_BACKUP_EXPIRY: Configure how long (in seconds) to keep backups before they are deleted. By default when automated backups are disabled backups are kept forever (0 seconds), else the backups expire in 7 days (604800 seconds).
-        GITLAB_BACKUP_TIME: Set a time for the automatic backups in `HH:MM` format. Defaults to `04:00`.
+            GITLAB_BACKUP_DIR: The backup folder in the container. Defaults to `/home/git/data/backups`
+            GITLAB_BACKUPS: Setup cron job to automatic backups. Possible values `disable`, `daily`, `weekly` or `monthly`. Disabled by default
+            GITLAB_BACKUP_EXPIRY: Configure how long (in seconds) to keep backups before they are deleted. By default when automated backups are disabled backups are kept forever (0 seconds), else the backups expire in 7 days (604800 seconds).
+            GITLAB_BACKUP_TIME: Set a time for the automatic backups in `HH:MM` format. Defaults to `04:00`.
 
 - nginx 配置
 
    1. 监听 80 端口转发服务器 8000 端口。
 
-# Maintenance
+#### Maintenance
 
 - 基本信息
 
-        1. gitlab host地址`my_gitlab.conf`中的`GITLAB_HOST`配置项。
-        2. root 用户初始密码`my_gitlab.conf`中的`GITLAB_ROOT_PASSWORD`配置项。
+            1. gitlab host地址`my_gitlab.conf`中的`GITLAB_HOST`配置项。
+            2. root 用户初始密码`my_gitlab.conf`中的`GITLAB_ROOT_PASSWORD`配置项。
 
 - 状态
 
-        1. 所有`data`和`log`挂载到`/my/gitlab/`文件夹下。
-        2. `mysql` 目录挂载到 `/my/gitlab/mysql`。
-        3. 查看 container 配置信息：`docker inspect gitlab`。
+            1. 所有`data`和`log`挂载到`/my/gitlab/`文件夹下。
+            2. `mysql` 目录挂载到 `/my/gitlab/mysql`。
+            3. 查看 container 配置信息：`docker inspect gitlab`。
 
 - 备份(引用修改自[17173](http://17173ops.com/2014/11/11/gitlab%E6%90%AD%E5%BB%BA%E4%B8%8E%E7%BB%B4%E6%8A%A4%EF%BC%88%E5%9F%BA%E4%BA%8Edocker%E9%95%9C%E5%83%8Fsameersbndocker-gitlab%EF%BC%89.shtml#toc8))
     1. 备份：
