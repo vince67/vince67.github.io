@@ -3,11 +3,11 @@ Vince has a river
 
 Blog page of vincent yonng.
 
-It is transformed by "Jekyll":http://github.com/mojombo/jekyll into a static site where I push the project to GitHub.
+It is transformed by [Jekyll](http://github.com/mojombo/jekyll) into a static site where I push the project to GitHub.
 
 Templates are created by vincent, the name of this site in Chinese is
 
-维斯有条河 : http://vince67.github.io.
+[维斯有条河](http://vince67.github.io)
 
 License
 ==============
