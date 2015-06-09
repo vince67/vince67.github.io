@@ -7,12 +7,6 @@
 ###<strong>{{ page.title }}</strong>&nbsp;&nbsp;<small>{{ page.date | date_to_string }}</small>
 
 
-
-- [Introduction](#Introduction)
-- [Installtion](#Installtion)
-- [Start](#Start)
-- [Maintenance](#Maintenance)
-
 #### Introduction
 
 - GITLAB版本
@@ -92,6 +86,7 @@
 
 
 - 以上脚本用来启动 gitlab， 下面依次解释带有注释的重要行。
+
     - 首先启动 redis 和 mysql 的 container， 使用的是之前下载好的镜像。
 
     - 在启动 mysql container 的时候新建了 `/my/gitlab/mysql` 目录，用来挂载docker内部的 `/var/lib/mysql` 目录。
@@ -103,6 +98,7 @@
     - 挂载了两个新建目录 `/my/gitlab/data` `/my/gitlab/log`, 这样在 host 主机上就可以找到这些内容。
 
     - `--env-file my_gitlab.conf` 此处选项是通过 `my_gitlab.conf` 文件来作为配置文件启动， 下面介绍几个常用配置组。
+
 
 
 -  `my_gitlab.conf`文件中的常用配置组。包括：
@@ -147,14 +143,14 @@
 
 - 基本信息
 
-            1. gitlab host地址`my_gitlab.conf`中的`GITLAB_HOST`配置项。
-            2. root 用户初始密码`my_gitlab.conf`中的`GITLAB_ROOT_PASSWORD`配置项。
+            gitlab host地址`my_gitlab.conf`中的`GITLAB_HOST`配置项。
+            root 用户初始密码`my_gitlab.conf`中的`GITLAB_ROOT_PASSWORD`配置项。
 
 - 状态
 
-            1. 所有`data`和`log`挂载到`/my/gitlab/`文件夹下。
-            2. `mysql` 目录挂载到 `/my/gitlab/mysql`。
-            3. 查看 container 配置信息：`docker inspect gitlab`。
+            所有`data`和`log`挂载到`/my/gitlab/`文件夹下。
+            `mysql` 目录挂载到 `/my/gitlab/mysql`。
+            查看 container 配置信息：`docker inspect gitlab`。
 
 - 备份(引用修改自[17173](http://17173ops.com/2014/11/11/gitlab%E6%90%AD%E5%BB%BA%E4%B8%8E%E7%BB%B4%E6%8A%A4%EF%BC%88%E5%9F%BA%E4%BA%8Edocker%E9%95%9C%E5%83%8Fsameersbndocker-gitlab%EF%BC%89.shtml#toc8))
     1. 备份：
