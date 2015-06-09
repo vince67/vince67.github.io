@@ -4,10 +4,9 @@
     title:  【Gitlab】迅速搭建可用 gitlab
 ---
 
-###<strong>{{ page.title }}</strong>&nbsp;&nbsp;<small>{{ page.date | date_to_string }}</small>
+##<strong>{{ page.title }}</strong>&nbsp;&nbsp;<small>{{ page.date | date_to_string }}</small><br><br>
 
-
-#### Introduction
+### Introduction
 
 - GITLAB版本
 
@@ -27,7 +26,7 @@
    1. [docker-gitlab](https://github.com/sameersbn/docker-gitlab)
    2. [17173](http://17173ops.com/2014/11/11/gitlab%E6%90%AD%E5%BB%BA%E4%B8%8E%E7%BB%B4%E6%8A%A4%EF%BC%88%E5%9F%BA%E4%BA%8Edocker%E9%95%9C%E5%83%8Fsameersbndocker-gitlab%EF%BC%89.shtml#toc8)
 
-#### Installtion
+### Installtion
 
 - 我们使用`docker`的方式搭建`gitlab`, 所以首先需要[安装 docker](https://docs.docker.com/installation/ubuntulinux/)。
 
@@ -42,7 +41,7 @@
         docker pull sameersbn/mysql:latest
         docker pull sameersbn/redis:lates
 
-#### Start
+### Start
 
 - 官方提供了[Quick Start](https://github.com/sameersbn/docker-gitlab#quick-start)的参考。
 
@@ -139,18 +138,18 @@
 
    1. 监听 80 端口转发服务器 8000 端口。
 
-#### Maintenance
+### Maintenance
 
 - 基本信息
 
-            gitlab host地址`my_gitlab.conf`中的`GITLAB_HOST`配置项。
-            root 用户初始密码`my_gitlab.conf`中的`GITLAB_ROOT_PASSWORD`配置项。
+    - gitlab host地址`my_gitlab.conf`中的`GITLAB_HOST`配置项。
+    - root 用户初始密码`my_gitlab.conf`中的`GITLAB_ROOT_PASSWORD`配置项。
 
 - 状态
 
-            所有`data`和`log`挂载到`/my/gitlab/`文件夹下。
-            `mysql` 目录挂载到 `/my/gitlab/mysql`。
-            查看 container 配置信息：`docker inspect gitlab`。
+    - 所有`data`和`log`挂载到`/my/gitlab/`文件夹下。
+    - `mysql` 目录挂载到 `/my/gitlab/mysql`。
+    - 查看 container 配置信息：`docker inspect gitlab`。
 
 - 备份(引用修改自[17173](http://17173ops.com/2014/11/11/gitlab%E6%90%AD%E5%BB%BA%E4%B8%8E%E7%BB%B4%E6%8A%A4%EF%BC%88%E5%9F%BA%E4%BA%8Edocker%E9%95%9C%E5%83%8Fsameersbndocker-gitlab%EF%BC%89.shtml#toc8))
     1. 备份：
