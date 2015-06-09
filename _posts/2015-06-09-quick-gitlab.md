@@ -36,7 +36,7 @@
 
 - 我们使用`docker`的方式搭建`gitlab`, 所以首先需要[安装 docker](https://docs.docker.com/installation/ubuntulinux/)。
 
-    ```bash
+    ```
 
     sudo apt-get purge docker.io
     curl -s https://get.docker.io/ubuntu/ | sudo sh
@@ -46,7 +46,7 @@
 
 - 使用`docker`依次下载镜像，包括`gitlab``mysql``redis`, 三个镜像将用作启动三个`docker container`。
 
-    ```bash
+    ```
 
     docker pull sameersbn/gitlab:7.10.4
     docker pull sameersbn/mysql:latest
@@ -60,7 +60,7 @@
 
 - start.sh
 
-    ```bash
+    ```
 
         echo "Starting Redis..."               # 启动 redis container
         docker run \
@@ -115,7 +115,7 @@
     1. **GITLAB HOST 配置**
 
         设置访问主页地址，以及 root 用户的初始密码
-        ```bash
+        ```
 
         GITLAB_HOST=example.gitlab.com
         GITLAB_TIMEZONE=UTC
@@ -123,7 +123,7 @@
         ```
     2. **EMAIL 配置** gitlab 平台的email设置
 
-        ```bash
+        ```
 
         GITLAB_EMAIL: The email address for the GitLab server. Defaults to `example@example.com`.
         GITLAB_EMAIL_DISPLAY_NAME: The name displayed in emails sent out by the GitLab mailer. Defaults to `GitLab`.
@@ -133,7 +133,7 @@
 
     3. **SMTP 配置** gitlab需要email配置来做通知工作。
 
-        ```bash
+        ```
 
         SMTP_ENABLED: Enable mail delivery via SMTP. Defaults to `true` if `SMTP_USER` is defined, else defaults to `false`.
         SMTP_DOMAIN: SMTP domain. Defaults to` www.gmail.com`
@@ -147,7 +147,7 @@
         ```
     4. **Backups 配置** 自动备份
 
-        ```bash
+        ```
 
         GITLAB_BACKUP_DIR: The backup folder in the container. Defaults to `/home/git/data/backups`
         GITLAB_BACKUPS: Setup cron job to automatic backups. Possible values `disable`, `daily`, `weekly` or `monthly`. Disabled by default
@@ -176,7 +176,7 @@
 - 备份(引用修改自[17173](http://17173ops.com/2014/11/11/gitlab%E6%90%AD%E5%BB%BA%E4%B8%8E%E7%BB%B4%E6%8A%A4%EF%BC%88%E5%9F%BA%E4%BA%8Edocker%E9%95%9C%E5%83%8Fsameersbndocker-gitlab%EF%BC%89.shtml#toc8))
     1. 备份：
 
-        ```bash
+        ```
             docker run \
                 --name='gitlab_backup' \
                 -it \
@@ -194,7 +194,7 @@
 
     2. 恢复：
 
-       ```bash
+       ```
         docker run \
             --name='gitlab_restore' \
             -it \
