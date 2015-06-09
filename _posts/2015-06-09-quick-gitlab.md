@@ -38,11 +38,14 @@
 
     ```
         sudo apt-get purge docker.io
-
+    ```
+    ```
         curl -s https://get.docker.io/ubuntu/ | sudo sh
-
+    ```
+    ```
         sudo apt-get update
-
+    ```
+    ```
         sudo apt-get install lxc-docker
     ```
 
@@ -50,7 +53,11 @@
 
     ```
         docker pull sameersbn/gitlab:7.10.4
+    ```
+    ```
         docker pull sameersbn/mysql:latest
+    ```
+    ```
         docker pull sameersbn/redis:lates
     ```
 
