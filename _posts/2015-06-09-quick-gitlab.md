@@ -37,20 +37,18 @@
 - 我们使用`docker`的方式搭建`gitlab`, 所以首先需要[安装 docker](https://docs.docker.com/installation/ubuntulinux/)。
 
     ```
-
-    sudo apt-get purge docker.io
-    curl -s https://get.docker.io/ubuntu/ | sudo sh
-    sudo apt-get update
-    sudo apt-get install lxc-docker
+        sudo apt-get purge docker.io
+        curl -s https://get.docker.io/ubuntu/ | sudo sh
+        sudo apt-get update
+        sudo apt-get install lxc-docker
     ```
 
 - 使用`docker`依次下载镜像，包括`gitlab``mysql``redis`, 三个镜像将用作启动三个`docker container`。
 
     ```
-
-    docker pull sameersbn/gitlab:7.10.4
-    docker pull sameersbn/mysql:latest
-    docker pull sameersbn/redis:lates
+        docker pull sameersbn/gitlab:7.10.4
+        docker pull sameersbn/mysql:latest
+        docker pull sameersbn/redis:lates
     ```
 
 # Start
@@ -61,7 +59,6 @@
 - start.sh
 
     ```
-
         echo "Starting Redis..."               # 启动 redis container
         docker run \
         --name=gitlab_redis \
