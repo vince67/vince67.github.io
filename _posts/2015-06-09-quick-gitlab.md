@@ -6,7 +6,8 @@
 
 ####<strong>{{ page.title }}</strong>&nbsp;&nbsp;<small>{{ page.date | date_to_string }}</small>
 
-# Content
+
+
 - [Introduction](#Introduction)
 - [Installtion](#Installtion)
 - [Start](#Start)
@@ -57,9 +58,11 @@
     ```
         docker pull sameersbn/gitlab:7.10.4
     ```
+
     ```
         docker pull sameersbn/mysql:latest
     ```
+
     ```
         docker pull sameersbn/redis:lates
     ```
@@ -72,6 +75,7 @@
 - start.sh
 
     ```
+
         echo "Starting Redis..."               # 启动 redis container
         docker run \
         --name=gitlab_redis \
@@ -126,9 +130,14 @@
 
         设置访问主页地址，以及 root 用户的初始密码
         ```
-
         GITLAB_HOST=example.gitlab.com
+        ```
+
+        ```
         GITLAB_TIMEZONE=UTC
+        ```
+
+        ```
         GITLAB_ROOT_PASSWORD=password
         ```
     2. **EMAIL 配置** gitlab 平台的email设置
@@ -136,8 +145,17 @@
         ```
 
         GITLAB_EMAIL: The email address for the GitLab server. Defaults to `example@example.com`.
+        ```
+
+        ```
         GITLAB_EMAIL_DISPLAY_NAME: The name displayed in emails sent out by the GitLab mailer. Defaults to `GitLab`.
+        ```
+
+        ```
         GITLAB_EMAIL_REPLY_TO: The reply to address of emails sent out by GitLab. Defaults to the `noreply@example.com`.
+        ```
+
+        ```
         GITLAB_EMAIL_ENABLED: Enable or disable gitlab mailer. Defaults to the `SMTP_ENABLED` configuration.
         ```
 
@@ -146,13 +164,37 @@
         ```
 
         SMTP_ENABLED: Enable mail delivery via SMTP. Defaults to `true` if `SMTP_USER` is defined, else defaults to `false`.
+        ```
+
+        ```
         SMTP_DOMAIN: SMTP domain. Defaults to` www.gmail.com`
+        ```
+
+        ```
         SMTP_HOST: SMTP server host. Defaults to `smtp.gmail.com`.
+        ```
+
+        ```
         SMTP_PORT: SMTP server port. Defaults to `587`.
+        ```
+
+        ```
         SMTP_USER: SMTP username.
+        ```
+
+        ```
         SMTP_PASS: SMTP password.
+        ```
+
+        ```
         SMTP_STARTTLS: Enable STARTTLS. Defaults to `true`.
+        ```
+
+        ```
         SMTP_OPENSSL_VERIFY_MODE: SMTP openssl verification mode. Accepted values are `none`, `peer`, `client_once` and `fail_if_no_peer_cert`. Defaults to `none`.
+        ```
+
+        ```
         SMTP_AUTHENTICATION: Specify the SMTP authentication method. Defaults to `login` if `SMTP_USER` is set.
         ```
     4. **Backups 配置** 自动备份
@@ -160,8 +202,17 @@
         ```
 
         GITLAB_BACKUP_DIR: The backup folder in the container. Defaults to `/home/git/data/backups`
+        ```
+
+        ```
         GITLAB_BACKUPS: Setup cron job to automatic backups. Possible values `disable`, `daily`, `weekly` or `monthly`. Disabled by default
+        ```
+
+        ```
         GITLAB_BACKUP_EXPIRY: Configure how long (in seconds) to keep backups before they are deleted. By default when automated backups are disabled backups are kept forever (0 seconds), else the backups expire in 7 days (604800 seconds).
+        ```
+
+        ```
         GITLAB_BACKUP_TIME: Set a time for the automatic backups in `HH:MM` format. Defaults to `04:00`.
 
         ```
@@ -186,7 +237,6 @@
 - 备份(引用修改自[17173](http://17173ops.com/2014/11/11/gitlab%E6%90%AD%E5%BB%BA%E4%B8%8E%E7%BB%B4%E6%8A%A4%EF%BC%88%E5%9F%BA%E4%BA%8Edocker%E9%95%9C%E5%83%8Fsameersbndocker-gitlab%EF%BC%89.shtml#toc8))
     1. 备份：
 
-        ```
             docker run \
                 --name='gitlab_backup' \
                 -it \
@@ -198,25 +248,22 @@
                 -v /my/gitlab/data:/home/git/data \
                 -v /my/gitlab/log:/var/log/gitlab \
                 sameersbn/gitlab:7.10.4 app:rake gitlab:backup:create
-        ```
 
-           - 过程能在屏幕上看到，备份会自动打成tar包放入/my/gitlab/data/backups里。可以自行对该tar包做压缩，例如gzip 时间戳_gitlab_backup.tar。
+       - 过程能在屏幕上看到，备份会自动打成tar包放入/my/gitlab/data/backups里。可以自行对该tar包做压缩，例如gzip 时间戳_gitlab_backup.tar。
 
     2. 恢复：
 
-       ```
-        docker run \
-            --name='gitlab_restore' \
-            -it \
-            --rm \
-            --link gitlab_mysql:mysql \
-            --link gitlab_redis:redisio \
-            -v /var/run/docker.sock:/run/docker.sock \
-            -v $(which docker):/bin/docker \
-            -v /my/gitlab/data:/home/git/data \
-            -v /my/gitlab/log:/var/log/gitlab \
-            sameersbn/gitlab:7.10.4 app:rake gitlab:backup:restore
-        ```
+            docker run \
+                --name='gitlab_restore' \
+                -it \
+                --rm \
+                --link gitlab_mysql:mysql \
+                --link gitlab_redis:redisio \
+                -v /var/run/docker.sock:/run/docker.sock \
+                -v $(which docker):/bin/docker \
+                -v /my/gitlab/data:/home/git/data \
+                -v /my/gitlab/log:/var/log/gitlab \
+                sameersbn/gitlab:7.10.4 app:rake gitlab:backup:restore
 
           - 屏幕上会将/my/gitlab/data/backups中的所有文件和目录列出来，复制粘贴要恢复的tar包文件名，敲入回车即开始恢复。
           - 注意：恢复时会将当前数据库中的所有表先删掉再导入备份tar包的里sql文件，因此此步要小心。
