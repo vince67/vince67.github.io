@@ -37,6 +37,7 @@
 - 我们使用`docker`的方式搭建`gitlab`, 所以首先需要[安装 docker](https://docs.docker.com/installation/ubuntulinux/)。
 
     ```bash
+
     sudo apt-get purge docker.io
     curl -s https://get.docker.io/ubuntu/ | sudo sh
     sudo apt-get update
@@ -46,6 +47,7 @@
 - 使用`docker`依次下载镜像，包括`gitlab``mysql``redis`, 三个镜像将用作启动三个`docker container`。
 
     ```bash
+
     docker pull sameersbn/gitlab:7.10.4
     docker pull sameersbn/mysql:latest
     docker pull sameersbn/redis:lates
@@ -59,6 +61,7 @@
 - start.sh
 
     ```bash
+
         echo "Starting Redis..."               # 启动 redis container
         docker run \
         --name=gitlab_redis \
@@ -113,6 +116,7 @@
 
         设置访问主页地址，以及 root 用户的初始密码
         ```bash
+
         GITLAB_HOST=example.gitlab.com
         GITLAB_TIMEZONE=UTC
         GITLAB_ROOT_PASSWORD=password
@@ -120,6 +124,7 @@
     2. **EMAIL 配置** gitlab 平台的email设置
 
         ```bash
+
         GITLAB_EMAIL: The email address for the GitLab server. Defaults to `example@example.com`.
         GITLAB_EMAIL_DISPLAY_NAME: The name displayed in emails sent out by the GitLab mailer. Defaults to `GitLab`.
         GITLAB_EMAIL_REPLY_TO: The reply to address of emails sent out by GitLab. Defaults to the `noreply@example.com`.
@@ -129,6 +134,7 @@
     3. **SMTP 配置** gitlab需要email配置来做通知工作。
 
         ```bash
+
         SMTP_ENABLED: Enable mail delivery via SMTP. Defaults to `true` if `SMTP_USER` is defined, else defaults to `false`.
         SMTP_DOMAIN: SMTP domain. Defaults to` www.gmail.com`
         SMTP_HOST: SMTP server host. Defaults to `smtp.gmail.com`.
@@ -142,6 +148,7 @@
     4. **Backups 配置** 自动备份
 
         ```bash
+
         GITLAB_BACKUP_DIR: The backup folder in the container. Defaults to `/home/git/data/backups`
         GITLAB_BACKUPS: Setup cron job to automatic backups. Possible values `disable`, `daily`, `weekly` or `monthly`. Disabled by default
         GITLAB_BACKUP_EXPIRY: Configure how long (in seconds) to keep backups before they are deleted. By default when automated backups are disabled backups are kept forever (0 seconds), else the backups expire in 7 days (604800 seconds).
@@ -188,17 +195,17 @@
     2. 恢复：
 
        ```bash
-    docker run \
-        --name='gitlab_restore' \
-        -it \
-        --rm \
-        --link gitlab_mysql:mysql \
-        --link gitlab_redis:redisio \
-        -v /var/run/docker.sock:/run/docker.sock \
-        -v $(which docker):/bin/docker \
-        -v /my/gitlab/data:/home/git/data \
-        -v /my/gitlab/log:/var/log/gitlab \
-        sameersbn/gitlab:7.10.4 app:rake gitlab:backup:restore
+        docker run \
+            --name='gitlab_restore' \
+            -it \
+            --rm \
+            --link gitlab_mysql:mysql \
+            --link gitlab_redis:redisio \
+            -v /var/run/docker.sock:/run/docker.sock \
+            -v $(which docker):/bin/docker \
+            -v /my/gitlab/data:/home/git/data \
+            -v /my/gitlab/log:/var/log/gitlab \
+            sameersbn/gitlab:7.10.4 app:rake gitlab:backup:restore
         ```
 
           - 屏幕上会将/my/gitlab/data/backups中的所有文件和目录列出来，复制粘贴要恢复的tar包文件名，敲入回车即开始恢复。
