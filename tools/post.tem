@@ -1,0 +1,13 @@
+---
+    layout: default
+    comments: true
+    title: post.tmp
+---
+
+##<strong>{{ page.title }}</strong>&nbsp;&nbsp;<small>{{ page.date | date_to_string }}</small><br><br>
+
+### sub-title
+
+### sub-title
+
+### sub-title
