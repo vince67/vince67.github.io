@@ -36,17 +36,16 @@
 - 说明：这是一段 Python 代码，这段代码来自 GitHub 用户 [justinfay](https://gist.github.com/justinfay/3403846)。为了使逻辑更清楚，我修改了代码的部分内容和注释，以下是修改后的代码，我们用这段代码来看令牌桶算法的 redis 实现。
 
 
-```
-
+<pre>
 import redis
 from redis import WatchError
 import time
 
-RATE = 0.1  
-# 令牌桶的最大容量       
-DEFAULT = 100 
+RATE = 0.1
+# 令牌桶的最大容量
+DEFAULT = 100
 # redis key 的过期时间
-TIMEOUT = 60 * 60 
+TIMEOUT = 60 * 60
 
 r = redis.Redis()
 
@@ -55,8 +54,8 @@ def token_bucket(tokens, key):
     pipe = r.pipeline()
     while 1:
         try:
-            pipe.watch('%s:available' % key) 
-            pipe.watch('%s:ts' % key)    
+            pipe.watch('%s:available' % key)
+            pipe.watch('%s:ts' % key)
 
             current_ts = time.time()
 
@@ -69,48 +68,48 @@ def token_bucket(tokens, key):
                 # 通过时间戳计算这段时间内应该添加多少令牌，如果桶满，令牌数取桶满数。
                 current_tokens = float(old_tokens) + min(
                     (current_ts - float(old_ts)) * RATE,
-                    DEFAULT - float(old_tokens)  
+                    DEFAULT - float(old_tokens)
                 )
             # 判断剩余令牌是否足够
-            if 0 &lt;= tokens &lt;= current_tokens: 
-                current_tokens -= tokens 
-                consumes = True 
-            else: 
-                consumes = False 
+            if 0 &lt;= tokens &lt;= current_tokens:
+                current_tokens -= tokens
+                consumes = True
+            else:
+                consumes = False
 
             # 以下动作为更新 redis 中key的值，并跳出循环返回结果。
-            pipe.multi() 
-            pipe.set('%s:available' % key, current_tokens) 
-            pipe.expire('%s:available' % key, TIMEOUT) 
-            pipe.set('%s:ts' % key, current_ts) 
-            pipe.expire('%s:ts' % key, TIMEOUT) 
-            pipe.execute() 
-            break 
-        except WatchError: 
-            continue 
-        finally: 
-            pipe.reset() 
-    return consumes 
+            pipe.multi()
+            pipe.set('%s:available' % key, current_tokens)
+            pipe.expire('%s:available' % key, TIMEOUT)
+            pipe.set('%s:ts' % key, current_ts)
+            pipe.expire('%s:ts' % key, TIMEOUT)
+            pipe.execute()
+            break
+        except WatchError:
+            continue
+        finally:
+            pipe.reset()
+    return consumes
 
-if __name__ == "__main__": 
-    tokens = 5 
-    key = '192.168.1.1' 
-    if token_bucket(tokens, key): 
-        print 'haz tokens' 
-    else: 
-        print 'cant haz tokens'</pre>
+if __name__ == "__main__":
+    tokens = 5
+    key = '192.168.1.1'
+    if token_bucket(tokens, key):
+        print 'haz tokens'
+    else:
+        print 'cant haz tokens'
+</pre>
 
-```
 
 ###需要说的几点
 
 
-####1. 这段代码在网络流量整形策略中起到什么作用？</span>
+####1. 这段代码在网络流量整形策略中起到什么作用?
 
 
 - 对访客的一次访问，我们通过以上代码可以来判断此次访问是否超过了我们的限制，通过返回的判断结果，我们将对此次访问选择正确的处理策略，比如你可以拒绝消耗完令牌的访客进行访问，从而控制他的访问速率，从而达到网络流量整形的目的。
 
-####2.  redis 在其中如何工作？</span>
+####2.  redis 在其中如何工作？
 
 
 - 对于每个独立的访客，redis 会为他建立两个 key，一个 key 保存了剩余令牌的数量，另外一个 key 保存了最近一次访问的时间戳。其中，最近一次访问时间戳在新访问到来时候用于计算时间间隔，从而计算在此时间间隔内应该向令牌桶中添加多少令牌，进而获得当前令牌桶的剩余令牌数。
