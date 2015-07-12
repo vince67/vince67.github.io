@@ -12,7 +12,7 @@
 
 - 我们希望服务器能在请求流量的控制上有一定的自动控制能力；
 - 本文通过简介令牌桶算法和讨论算法的 redis 实现给出流量整形(traffic shaping)的示例，来介绍网络流量整形。
-- <small>本篇同步发表在[伯乐在线社区](http://blog.jobbole.com/88064/)</small>
+- 本篇同步发表在[伯乐在线社区](http://blog.jobbole.com/88064/)
 <br>
 <br>
 
