@@ -8,26 +8,27 @@ title:  【Redis】Redis 与搜索热词推荐
 
 
 ##摘要
+<hr>
 
 本篇解决一个非常普通的需求：在用户输入搜索关键词的过程中，系统给出搜索的推荐关键词。
 实现的方式还是通过 `redis`，这次使用它5种数据结构中的 `zset`，也就是有序集合。
 
 
 ## Redis的有序集合（zset）
-
+<hr>
 关于有序集合不过多赘述，先给出传送门：[Redis 有序集合](http://www.redis.cn/topics/data-types.html#sorted-sets)。
 
 在有序集合中，`redis`中某个`key`存储一个拥有多个`value`值的集合，并且集合中每个`value`都附带一个`score`，这个`score`是`value`的评分，有序集合中的`value`存储时候按照`score`排序，这样的效率叼叼的，具体实现方式推荐翻阅 [《Redis设计与实现》](http://baike.baidu.com/link?url=woql7xG1mjV7RDa90sdUBeD6gvoZl-OMs8umB066SSbuAvwX0cVdCWpR7YqHCLo10m7ZLIPeiS9V8RfAbtu4JK)。
 
 ## 搜索热词推荐
-
+<hr>
 这个功能的样子很常见，在各种大网站的搜索框里，当你输入关键词输入到一半时会推荐给你搜索热词。
 
 在美团技术团队2014年的博客文章中也曾提到过此类实现，具体可参考美团博客的文章 [搜索引擎关键字智能提示的一种实现](http://tech.meituan.com/pinyin-suggest.html)。
 
 
 ## 实现思路
-
+<hr>
 #### 一、简单的需求分析
 对于一个搜索关键词的联想大抵分为几种情况，比如假设用户想要搜索 `北京雾霾` 这样一个概念。
 
@@ -82,5 +83,5 @@ title:  【Redis】Redis 与搜索热词推荐
 
 
 ##总结
-
+<hr>
 优化自己的分词以及权值分配，通过本文的实现思路就能给出很好的搜索热词推荐服务。
